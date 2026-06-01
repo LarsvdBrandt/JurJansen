@@ -17,6 +17,11 @@ const monoFont = Space_Mono({
 export const metadata: Metadata = {
   title: "Jur Jansen - De Methode",
   description: "Jur Jansen helpt ondernemers groeien in winst, rust en vrijheid.",
+  icons: {
+    icon: [{ url: "/favicon.png?v=2", type: "image/png", sizes: "64x64" }],
+    shortcut: ["/favicon.png?v=2"],
+    apple: [{ url: "/apple-touch-icon.png?v=2", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({
