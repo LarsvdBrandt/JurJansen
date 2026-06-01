@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const herkenning = [
   "Je neemt keer op keer nieuwe mensen aan om problemen op te lossen — maar de problemen verdwijnen niet.",
@@ -83,10 +86,33 @@ const stappen = [
 ];
 
 export default function Home() {
+  const heroCtaRef = useRef<HTMLAnchorElement | null>(null);
+  const [showFloatingCta, setShowFloatingCta] = useState(false);
+
+  useEffect(() => {
+    const ctaNode = heroCtaRef.current;
+    if (!ctaNode) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowFloatingCta(!entry.isIntersecting);
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(ctaNode);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <main className="bg-[var(--color-obsidian)] text-[var(--color-paper)]">
+    <main className="bg-[var(--color-obsidian)] pb-24 text-[var(--color-paper)] sm:pb-0">
       <div className="mx-auto max-w-6xl px-6 pb-12 pt-4 sm:px-10">
-        <header className="sticky top-0 z-30 flex items-center justify-between rounded-[15px] border border-[var(--color-border)] bg-black/80 px-5 py-3 backdrop-blur">
+        <header className="sticky top-0 z-30 hidden items-center justify-between rounded-[15px] border border-[var(--color-border)] bg-black/80 px-5 py-3 backdrop-blur sm:flex">
           <span className="text-sm font-semibold uppercase tracking-[0.14em]">Jur Jansen</span>
           <Link
             href="/apply"
@@ -96,11 +122,11 @@ export default function Home() {
           </Link>
         </header>
 
-        <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl flex-col items-center justify-center py-14 text-center">
+        <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl flex-col items-center justify-start pt-8 text-center sm:justify-center sm:py-14">
           <p className="rounded-[15px] border border-[var(--color-border)] px-4 py-2 text-xs uppercase tracking-[0.2em] text-neutral-300">
             Voor ondernemers die vast zitten in hun eigen bedrijf
           </p>
-          <h1 className="mt-8 text-5xl font-semibold leading-[1.02] sm:text-7xl">
+          <h1 className="mt-7 text-4xl font-semibold leading-[1.05] sm:mt-8 sm:text-7xl sm:leading-[1.02]">
             Je omzet groeit.
             <br />
             Je winst <em className="italic">verdwijnt.</em>
@@ -128,6 +154,7 @@ export default function Home() {
           </div>
 
           <Link
+            ref={heroCtaRef}
             href="/apply"
             className="mt-8 rounded-[15px] border border-white bg-white px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-neutral-200"
           >
@@ -369,6 +396,19 @@ export default function Home() {
       <footer className="border-t border-[var(--color-border)] px-6 py-8 text-center text-xs uppercase tracking-[0.12em] text-[var(--color-muted)] sm:px-10">
         Jur Jansen © 2026
       </footer>
+
+      <div
+        className={`fixed inset-x-0 bottom-0 z-40 p-4 transition-opacity duration-300 sm:hidden ${
+          showFloatingCta ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <Link
+          href="/apply"
+          className="block w-full rounded-[15px] border border-white bg-white px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-black"
+        >
+          Aanmelden
+        </Link>
+      </div>
     </main>
   );
 }
