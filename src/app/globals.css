@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --color-obsidian: #0a0a0a;
+  --color-paper: #f5f5f5;
+  --color-charcoal: #151515;
+  --color-surface: #1d1d1d;
+  --color-muted: #a3a3a3;
+  --color-border: rgba(255, 255, 255, 0.16);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-body), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.hero-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.08), transparent 38%),
+    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.06), transparent 42%),
+    linear-gradient(to bottom, #141414 0%, #0a0a0a 44%, #080808 100%);
+}
+
+.fade-up {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-up {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-up-delay {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger > * {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise-in 700ms ease forwards;
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise-in 700ms ease forwards;
+  }
+
+  .reveal-up-delay {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise-in 850ms ease 120ms forwards;
+  }
+
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rise-in 650ms ease forwards;
+  }
+}
+
+.stagger > *:nth-child(1) {
+  animation-delay: 60ms;
+}
+
+.stagger > *:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.stagger > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.stagger > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.stagger > *:nth-child(5) {
+  animation-delay: 300ms;
+}
+
+.stagger > *:nth-child(6) {
+  animation-delay: 360ms;
+}
+
+@keyframes rise-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
