@@ -141,7 +141,7 @@ export default function Home() {
             <div className="aspect-video w-full overflow-hidden rounded-[15px] border border-[var(--color-border)] bg-black">
               <iframe
                 className="h-full w-full"
-                src="https://www.youtube-nocookie.com/embed/8H1LPOux7Hk"
+                src="https://www.youtube-nocookie.com/embed/avlfbpMmnLc"
                 title="Jur Jansen VSL"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
