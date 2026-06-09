@@ -88,6 +88,7 @@ const stappen = [
 export default function Home() {
   const heroCtaRef = useRef<HTMLAnchorElement | null>(null);
   const [showFloatingCta, setShowFloatingCta] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const ctaNode = heroCtaRef.current;
@@ -104,8 +105,17 @@ export default function Home() {
 
     observer.observe(ctaNode);
 
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        setHasScrolled(true);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -395,7 +405,7 @@ export default function Home() {
 
       <div
         className={`fixed inset-x-0 bottom-0 z-40 p-4 transition-opacity duration-300 sm:hidden ${
-          showFloatingCta ? "opacity-100" : "pointer-events-none opacity-0"
+          showFloatingCta && hasScrolled ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         <Link
