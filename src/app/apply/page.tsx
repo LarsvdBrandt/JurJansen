@@ -1,7 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Script from "next/script";
 import { FormEvent, useMemo, useState } from "react";
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
 
 type QuestionType = "text" | "email" | "tel" | "textarea" | "multi-select" | "single-select";
 
@@ -176,10 +186,27 @@ export default function ApplyPage() {
   }
 
   async function sendApplyWebhook() {
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    if (!siteKey) {
+      throw new Error("reCAPTCHA site key ontbreekt.");
+    }
+
+    const recaptchaToken = await new Promise<string>((resolve, reject) => {
+      window.grecaptcha.ready(async () => {
+        try {
+          const token = await window.grecaptcha.execute(siteKey, { action: "apply" });
+          resolve(token);
+        } catch {
+          reject(new Error("reCAPTCHA uitvoering mislukt."));
+        }
+      });
+    });
+
     const fullName = getStringAnswer("naam");
     const firstName = fullName.split(/\s+/).filter(Boolean)[0] ?? fullName;
 
     const payload = {
+      recaptchaToken,
       source: "jur-jansen-apply-form",
       submitted_at: new Date().toISOString(),
       naam: fullName,
@@ -194,18 +221,15 @@ export default function ApplyPage() {
       investering: getStringAnswer("investering"),
     };
 
-    const formBody = new URLSearchParams(payload);
-
-    const response = await fetch(
-      "https://hooks.zapier.com/hooks/catch/14955932/4bmvzsb/",
-      {
-        method: "POST",
-        body: formBody,
-      },
-    );
+    const response = await fetch("/api/apply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
     if (!response.ok) {
-      throw new Error(`Webhook request failed with status ${response.status}`);
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error ?? `Versturen mislukt (${response.status})`);
     }
   }
 
