@@ -7,7 +7,7 @@ const herkenning = [
   "Je neemt keer op keer nieuwe mensen aan om problemen op te lossen — maar de problemen verdwijnen niet.",
   "Je omzet stijgt, maar je winst daalt. Van je hard verdiende omzet blijft aan het einde van de maand niets over.",
   "Je bent ondernemer geworden voor vrijheid — maar nu ben jij de gevangene van je eigen bedrijf.",
-  "Je stelt alles uit. De winst, de reizen, het leven. Altijd later. En \"later\" wordt nooit nu.",
+  "Je stelt alles uit. De winst, de reizen, het leven. Altijd later. En \"later\" wordt nu nooit.",
   "De stress sloopt je — maar je doet alsof het erbij hoort. Terwijl je lichaam al een ander signaal geeft.",
   "Je weet dat het anders moet. Maar je weet niet wat er precies veranderd moet worden. Dat weet je nu.",
 ];
@@ -42,7 +42,7 @@ const methode = [
 const filter = [
   {
     title: "Op zoek naar een snelle fix",
-    body: "Een hack, een cheatcode, een 30-dagenplan. Wat ik doe is echt en het is niet snel. Zoek het elders.",
+    body: "Een hack, een cheatcode, een simpel 7-dagen plan. Wat ik doe is echt en het is niet snel. Zoek het elders.",
   },
   {
     title: "De wereld geeft de schuld",
@@ -193,9 +193,9 @@ export default function Home() {
       <section className="mx-auto max-w-4xl px-6 py-20 sm:px-10">
         <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-muted)]">Hoofdstuk 01 — De opbouw</p>
         <h2 className="mt-3 text-3xl font-semibold leading-tight sm:text-5xl">
-          Van 0 naar 100K omzet.
+          <span className="text-white">Van 0 naar 100K omzet.</span>
           <br />
-          En toch alles verloren.
+          <span className="text-neutral-400">Op papier een droom, maar de werkelijkheid was anders</span>
         </h2>
         <p className="mt-3 text-xs uppercase tracking-[0.16em] text-neutral-400">
           Het verhaal dat niemand vertelt
@@ -214,14 +214,14 @@ export default function Home() {
           mijn lichaam stuurde de rekening.
         </blockquote>
         <p className="mt-8 text-[var(--color-muted)]">
-          Want van die 100K omzet bleef er niets over. Elke euro die binnenkwam ging
+          Want van die 100K omzet bleef weinig over. Elke euro die binnenkwam ging
           direct naar salarissen, huur, tools en alles wat een groot team meebrengt.
           En de slapeloze nachten, de constante stress, de druk om iedereen tevreden te
-          houden — dat leverde mij psoriasis en reuma op, op 24-jarige leeftijd. Iets
-          waar ik nu de rest van mijn leven mee leef.
+          houden. Precies dat leverde mij psoriasis en reuma op, op 24-jarige leeftijd.
+          Iets waar ik nu de rest van mijn leven mee deal.
         </p>
         <p className="mt-5 text-[var(--color-muted)]">
-          Laat dat niet de reden zijn dat jij pas in actie gaat.
+          Laat dat niet de reden zijn dat jij later pas in actie komt.
         </p>
       </section>
 
@@ -264,11 +264,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-20 sm:px-10">
         <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-muted)]">Hoofdstuk 03 — Het resultaat</p>
         <h2 className="mt-3 text-3xl font-semibold leading-tight sm:text-5xl">
-          80K omzet.
-          <br />
-          50K winst.
-          <br />
-          <em className="italic">2 mensen.</em>
+          80K omzet, 50K winst, 2 vaste krachten
         </h2>
         <p className="mt-3 text-xs uppercase tracking-[0.16em] text-neutral-400">
           Wat er overblijft als je stopt met opvullen
@@ -366,9 +362,9 @@ export default function Home() {
           die ik net beschreef —
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-[var(--color-muted)]">
-          Dan is er een beperkt aantal plaatsen beschikbaar. Dit is geen cursus die je
+          Dan is er een beperkt aantal plaatsen beschikbaar. Dit is geen traject die je
           koopt en vergeet. Dit is een persoonlijk traject waarbij we samen grondig
-          door jouw bedrijf heen duiken.
+          door jouw bedrijf heen duiken en waar we samen aan de toekomst bouwen.
         </p>
 
         <div className="mt-10 rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-left sm:p-8">
